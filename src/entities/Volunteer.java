@@ -3,6 +3,8 @@ package entities;
 import interfaces.Check;
 
 public class Volunteer implements Check {
+
+    //    parametri
     private final String name;
     private final boolean cv;
     private final int age;
