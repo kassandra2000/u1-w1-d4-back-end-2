@@ -6,28 +6,31 @@ import interfaces.Check;
 import java.util.Random;
 
 public abstract class Employee implements Check {
-    private final int serialNumber;
+    private final String serialNumber;
     private final double salary;
-    private Department department;
+    String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    private Department department;
     //costruttore
 
     public Employee(Department department, double salary) {
-        Random r = new Random();
-        this.serialNumber = r.nextInt(11111, 999999);
+
+        this.serialNumber = serialNumber();
         this.department = department;
         this.salary = salary;
     }
 
+    //metodi statici
     public static void printSerialNumber(Employee[] employees) {
         for (Employee employee : employees) {
-            System.out.println("la matricola del reparto: " + employee.getDepartment() + " è: " + employee.getSerialNumber());
+            System.out.println("la matricola del reparto " + employee.getDepartment() + " è: " + employee.getSerialNumber());
         }
     }
 
     public static void printMonthlySalary(Employee[] employees) {
         for (Employee employee : employees) {
             System.out.println(employee.calculateSalary());
+
         }
     }
 
@@ -38,15 +41,23 @@ public abstract class Employee implements Check {
         }
         System.out.println("la somma totale degli stipendi è: " + sum);
     }
-    //metodi statici
 
     //metodi
+    public String serialNumber() {
+        Random r = new Random();
+        String string = "";
+        for (int i = 0; i < 9; i++) {
+            string += str.charAt(r.nextInt(0, str.length()));
+        }
+        return string;
+    }
+
     public abstract String calculateSalary();
 
     public abstract double calculateOnlySalary();
     //getter e setter
 
-    public int getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
